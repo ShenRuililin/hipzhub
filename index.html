@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HipzHub</title>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(to bottom, #f9f1e7, #e1d7c2);
+        color: #333;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: background 0.5s;
+    }
+    header {
+        text-align: center;
+        margin-bottom: 40px;
+        font-weight: bold;
+    }
+    .card {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 600px;
+        box-shadow: 0 0px 0px black, 5px 5px 0px black;
+        border: 1px solid #333;
+        position: relative;
+    }
+    .card h1 {
+        font-weight: bold;
+        margin: 10px 0;
+        text-align: center;
+    }
+    .links a {
+        margin: 0 10px;
+        text-decoration: none;
+        color: #333;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <nav class="links">
+        <a href="https://docs.google.com/document/d/1yGUzKzhfEoNcSQ9emUmAq4gsRnyyiOC9G85TmLYciBM/pub" target="_blank">Whitepaper</a>
+        <a href="https://www.chatbase.co/chatbot-iframe/phJQomxRE70_s_LKLKka4" target="_blank">HipzAssistant</a>
+    </nav>
+</header>
+
+<div class="card">
+    <h1>HipzHub</h1>
+    <p>
+        When was the last time you picked up a paintbrush or sketched a doodle? If you're like most people, it's probably been a while. But did you know that engaging in art has numerous benefits for your mental health, creativity, and overall well-being?
+    </p>
+    <p>
+        Studies have shown that creating art can reduce stress, improve cognitive function, and boost self-esteem. At HipzHub, we believe that artistic expression is a fundamental human right, and we're on a mission to make it accessible to everyone.
+    </p>
+</div>
+
+<div class="card">
+    <h1>Your Art Journey Starts Here</h1>
+    <p>
+        HipzHub is a revolutionary platform that empowers artists and art enthusiasts worldwide. We've created a space where you can discover, create, and collaborate on art like never before.
+    </p>
+</div>
+
+<div class="card">
+    <h1>Where?</h1>
+    <p>
+        When you join HipzHub, you'll be greeted by HipzAssistant, your personal AI-powered companion. HipzAssistant is here to guide you through your artistic journey, offering personalized recommendations and support every step of the way.
+    </p>
+</div>
+
+<div class="card">
+    <h1>But… How?</h1>
+    <p>
+        Looking for inspiration? Check out HipzGallery, our immersive virtual gallery featuring the best of contemporary digital art. Explore a diverse range of artworks, discover emerging talents, and find the spark that ignites your creativity.
+    </p>
+    <p>
+        Ready to create? Head over to HipzColab, our innovative collaboration platform. With features like version control and real-time editing, you can work with artists from around the world, unleashing your collaborative potential and pushing the boundaries of your artistic vision.
+    </p>
+</div>
+
+<div class="card">
+    <h1>Blockchain</h1>
+    <p>
+        At HipzHub, we're committed to protecting your art and ensuring that you're fairly compensated for your work. That's why we've integrated blockchain technology into our platform.
+    </p>
+    <p>
+        With HipzChain, you can create secure, traceable NFTs for your artworks, guaranteeing their authenticity and provenance. And with our fractional ownership model, you can benefit directly from the success of your creations.
+    </p>
+</div>
+
+<div class="card">
+    <h1>Art for a Better World</h1>
+    <p>
+        At HipzHub, we believe that art has the power to change the world. That's why we've aligned our platform with the United Nations' Sustainable Development Goals (SDGs).
+    </p>
+    <p>
+        Through our commitment to quality education (SDG 4), reduced inequalities (SDG 10), sustainable communities (SDG 11), and decent work and economic growth (SDG 8), we're using art as a catalyst for positive change.
+    </p>
+</div>
+
+<div class="card">
+    <h1>Our Name</h1>
+    <p>
+        So why "HipzHub"? We chose this name because it embodies our vision of a vibrant, inclusive art community. "Hipz" represents our connection to the hip, contemporary art scene, while "Hub" signifies a central place where artists and art lovers can come together to create, collaborate, and grow.
+    </p>
+</div>
+
+<div class="card">
+    <h1>Join Us!</h1>
+    <p>
+        Are you ready to unleash your inner artist? Join HipzHub today and become part of a global community of creatives and visionaries. Sign up for our newsletter to stay updated on the latest features, events, and opportunities.
+    </p>
+    <p>
+        Want to learn more? Check out our whitepaper for a deep dive into the technical aspects of our platform and our vision for the future of art.
+    </p>
+    <p id="draw">
+        Now, start drawing.
+    </p>
+</div>
+
+<script>
+    window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+        const maxScroll = document.body.scrollHeight - window.innerHeight;
+        const scrollPercentage = scrollPosition / maxScroll;
+
+        // Background color transition
+        const startColor = [249, 241, 231]; // #f9f1e7 (rice color)
+        const endColor = [255, 255, 255]; // white
+
+        const newColor = startColor.map((start, index) => {
+            return Math.round(start + (endColor[index] - start) * scrollPercentage);
+        });
+
+        document.body.style.backgroundColor = `rgb(${newColor.join(',')})`;
+
+        // Font change to handwriting
+        const drawText = document.getElementById('draw');
+        const lastCard = document.getElementById('last-card');
+        const changeFontPosition = lastCard.offsetTop;
+
+        if (scrollPosition + window.innerHeight >= changeFontPosition) {
+            drawText.classList.add('handwriting');
+        } else {
+            drawText.classList.remove('handwriting');
+        }
+    });
+</script>
+
+</body>
+</html>

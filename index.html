@@ -1,47 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HipzHub</title>
-<style>
-    body {
-        font-family: 'Dexa Pro', monospace; /* Changed to Monospace */
-        background: linear-gradient(to bottom, #f9f1e7, #e1d7c2);
-        color: #333;
-        margin: 0;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        transition: background 0.5s;
-        line-height: 1.6; /* Increased line height */
-    }
-    header {
-        text-align: center;
-        margin-bottom: 40px;
-        font-weight: bold;
-    }
-    .card {
-        background-color: rgba(255, 255, 255, 0.9);
-        padding: 20px;
-        margin: 20px auto;
-        max-width: 800px; /* Increased width for more text space */
-        box-shadow: 0 0px 0px black, 5px 5px 0px black;
-        border: 1px solid #333;
-        position: relative;
-    }
-    .card h1 {
-        font-weight: bold;
-        margin: 10px 0;
-        text-align: center;
-    }
-    .links a {
-        margin: 0 10px;
-        text-decoration: none;
-        color: #333;
-    }
-</style>
+    <style>
+        body {
+            font-family: 'Dexa Pro', monospace;
+            background: linear-gradient(to bottom, #f9f1e7, #e1d7c2);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background 0.5s;
+            line-height: 1.6;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: bold;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 10px 0;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 0px 0px black, 5px 5px 0px black;
+            border: 1px solid #333;
+            position: relative;
+        }
+        .card h1 {
+            font-weight: bold;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .first-card {
+            margin-top: 100px;
+		}
+        .links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+        }
+        .mini-card {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0px 0px black, 5px 5px 0px black;
+            border: 1px solid #333;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.2s;
+        }
+        .mini-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
 </head>
 <body>
     
@@ -49,10 +77,11 @@
     <nav class="links">
         <a href="https://docs.google.com/document/d/1yGUzKzhfEoNcSQ9emUmAq4gsRnyyiOC9G85TmLYciBM/pub" target="_blank">Read Our Whitepaper</a>
         <a href="https://shenruililin.github.io/hipzhub/team/" target="_blank">Meet Our Team</a>
+        <a href="https://shenruililin.github.io/hipzhub/draw/" target="_blank" class="mini-card">Start Drawing!</a>
     </nav>
 </header>
 
-<div class="card">
+<div class="card first-card">
     <h1>HipzHub</h1>
     <p>
         When was the last time you picked up a paintbrush or sketched a doodle? If you're like most people, it's probably been a while. But did you know that engaging in art has numerous benefits for your mental health, creativity, and overall well-being?
@@ -119,7 +148,8 @@
         Want to learn more? Check out our whitepaper for a deep dive into the technical aspects of our platform and our vision for the future of art.
     </p>
     <p id="draw">
-        Now, start drawing.
+    <a href="https://shenruililin.github.io/hipzhub/draw/" target="_blank" class="mini-card">Now, start drawing.</a>
+    </p>
     </p>
 </div>
 

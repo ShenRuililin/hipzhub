@@ -48,17 +48,40 @@
     .brushes button {
         width: 100%;
         height: 30px;
+        position: relative;
     }
-    .buttons button {
-        width: 100%;
-        height: 30px;
-        font-size: 16px;
+    .brushes button:after {
+        display: block;
+        background: #808080;
+        content: '';
+        margin: 0 auto;
+    }
+    .brushes button:nth-of-type(1):after {
+        height: 1px;
+    }
+    .brushes button:nth-of-type(2):after {
+        height: 2px;
+    }
+    .brushes button:nth-of-type(3):after {
+        height: 3px;
+    }
+    .brushes button:nth-of-type(4):after {
+        height: 4px;
+    }
+    .brushes button:nth-of-type(5):after {
+        height: 5px;
     }
     .right-block {
-        width: 640px;
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     #paint-canvas {
-        cursor: crosshair;
+        width: 100%;
+        height: 100%;
+        max-width: 800px;
+        max-height: 600px;
         border: 1px solid #e0e0e0;
     }
 </style>
@@ -100,11 +123,11 @@
             <button type="button" value="#ffffff" style="background-color: #ffffff;"></button>
         </div>
         <div class="brushes">
-            <button type="button" value="1" style="border-top: 1px solid #000;"></button>
-            <button type="button" value="2" style="border-top: 2px solid #000;"></button>
-            <button type="button" value="3" style="border-top: 3px solid #000;"></button>
-            <button type="button" value="4" style="border-top: 4px solid #000;"></button>
-            <button type="button" value="5" style="border-top: 5px solid #000;"></button>
+            <button type="button" value="1"></button>
+            <button type="button" value="2"></button>
+            <button type="button" value="3"></button>
+            <button type="button" value="4"></button>
+            <button type="button" value="5"></button>
         </div>
         <div class="buttons">
             <button id="clear" type="button">Clear</button>
@@ -128,17 +151,13 @@ window.onload = function () {
     context.lineWidth = 1;
     var isDrawing = false;
 
-    var colors = document.getElementsByClassName('colors')[0];
-    colors.addEventListener('click', function(event) {
-        context.strokeStyle = event.target.value || 'black';
-    });
-
-    var brushes = document.getElementsByClassName('brushes')[0];
-    brushes.addEventListener('click', function(event) {
-        context.lineWidth = event.target.value || 1;
-    });
+    function setMouseCoordinates(event) {
+        mouseX = event.clientX - boundings.left;
+        mouseY = event.clientY - boundings.top;
+    }
 
     canvas.addEventListener('mousedown', function(event) {
+        boundings = canvas.getBoundingClientRect(); // Update boundings here
         setMouseCoordinates(event);
         isDrawing = true;
         context.beginPath();
@@ -146,8 +165,8 @@ window.onload = function () {
     });
 
     canvas.addEventListener('mousemove', function(event) {
-        setMouseCoordinates(event);
         if(isDrawing){
+            setMouseCoordinates(event);
             context.lineTo(mouseX, mouseY);
             context.stroke();
         }
@@ -158,10 +177,15 @@ window.onload = function () {
         isDrawing = false;
     });
 
-    function setMouseCoordinates(event) {
-        mouseX = event.clientX - boundings.left;
-        mouseY = event.clientY - boundings.top;
-    }
+    var colors = document.getElementsByClassName('colors')[0];
+    colors.addEventListener('click', function(event) {
+        context.strokeStyle = event.target.value || 'black';
+    });
+
+    var brushes = document.getElementsByClassName('brushes')[0];
+    brushes.addEventListener('click', function(event) {
+        context.lineWidth = event.target.value || 1;
+    });
 
     var clearButton = document.getElementById('clear');
     clearButton.addEventListener('click', function() {

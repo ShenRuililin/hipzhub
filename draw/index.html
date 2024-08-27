@@ -151,13 +151,17 @@ window.onload = function () {
     context.lineWidth = 1;
     var isDrawing = false;
 
-    function setMouseCoordinates(event) {
-        mouseX = event.clientX - boundings.left;
-        mouseY = event.clientY - boundings.top;
-    }
+    var colors = document.getElementsByClassName('colors')[0];
+    colors.addEventListener('click', function(event) {
+        context.strokeStyle = event.target.value || 'black';
+    });
+
+    var brushes = document.getElementsByClassName('brushes')[0];
+    brushes.addEventListener('click', function(event) {
+        context.lineWidth = event.target.value || 1;
+    });
 
     canvas.addEventListener('mousedown', function(event) {
-        boundings = canvas.getBoundingClientRect(); // Update boundings here
         setMouseCoordinates(event);
         isDrawing = true;
         context.beginPath();
@@ -165,8 +169,8 @@ window.onload = function () {
     });
 
     canvas.addEventListener('mousemove', function(event) {
+        setMouseCoordinates(event);
         if(isDrawing){
-            setMouseCoordinates(event);
             context.lineTo(mouseX, mouseY);
             context.stroke();
         }
@@ -177,15 +181,10 @@ window.onload = function () {
         isDrawing = false;
     });
 
-    var colors = document.getElementsByClassName('colors')[0];
-    colors.addEventListener('click', function(event) {
-        context.strokeStyle = event.target.value || 'black';
-    });
-
-    var brushes = document.getElementsByClassName('brushes')[0];
-    brushes.addEventListener('click', function(event) {
-        context.lineWidth = event.target.value || 1;
-    });
+    function setMouseCoordinates(event) {
+        mouseX = event.clientX - boundings.left;
+        mouseY = event.clientY - boundings.top;
+    }
 
     var clearButton = document.getElementById('clear');
     clearButton.addEventListener('click', function() {

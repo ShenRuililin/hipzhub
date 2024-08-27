@@ -42,7 +42,7 @@
         }
         .first-card {
             margin-top: 100px;
-		}
+	}
         .links {
             display: flex;
             justify-content: center;
@@ -69,6 +69,37 @@
         .mini-card:hover {
             transform: translateY(-5px);
         }
+	.expandable-card {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0px 0px black, 5px 5px 0px black;
+            border: 1px solid #333;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.2s, background-color 0.3s;
+    	}
+    	.expandable-card:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+	    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    	}
+    	.nested-card {
+            display: none;
+            padding: 15px;
+            margin-top: 10px;
+            box-shadow: 0 0px 0px black, 2px 2px 0px black;
+            border: 1px solid #333;
+            background-color: rgba(255, 255, 255, 0.95);
+    	}
+    	.nested-card img {
+            max-width: 50%;
+            height: auto;
+            margin: 10px auto;
+	    display: block;
+    	}
     </style>
 </head>
 <body>
@@ -127,9 +158,26 @@
     <p>
         At HipzHub, we believe that art has the power to change the world. That's why we've aligned our platform with the United Nations' Sustainable Development Goals (SDGs).
     </p>
-    <p>
+    <p class="expandable-card">
         Through our commitment to quality education (SDG 4), reduced inequalities (SDG 10), sustainable communities (SDG 11), and decent work and economic growth (SDG 8), we're using art as a catalyst for positive change.
     </p>
+    <div class="nested-card" id="nested-card">
+        <h2>SDG4: Quality Education</h2>
+        <img src="https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal4a.png" alt="SDG4: Quality Education">
+        <p>At HipzHub, we remember starting out as artists, hoping for a mentor to guide us through the twist and turns of creating and exhibiting. HipzHub advances quality education by providing free access to HipzAssitant, who provides tailored guidance for artists at all levels. By making art education widely accessible, HipzHub ensures that individuals from diverse backgrounds can develop skills essential for careers in the creative industries, thereby promoting lifelong learning and supporting the personal and professional growth of each artist.</p>
+
+        <h2>SDG8: Decent Work and Economic Growth</h2>
+        <img src="https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal8a.png" alt="SDG8: Decent Work and Economic Growth">
+        <p>We believe creativity is also productivity. HipzHub’s platform uses blockchain technology not just for security, but to ensure artists receive fair compensation for their work, turning their creative output into economic opportunity. By connecting artists to other collaborators and a worldwide market, we open up new pathways for economic independence and growth, making every brushstroke a potential source of income.</p>
+
+        <h2>SDG10: Reduced Inequalities</h2>
+        <img src="https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal10a.png" alt="SDG10: Reduced Inequalities">
+        <p>Expression is a fundamental human right, and at HipzHub, we make it our mission to ensure this right is upheld and accessible to all. Our platform is designed to dismantle barriers that artists from marginalized and underserved communities often face. The platform's inclusive design and policies ensure that artists, regardless of their location or background, can share their work, gain visibility, and receive equitable treatment and opportunities in the global art scene.</p>
+
+        <h2>SDG11: Sustainable Cities and Communities</h2>
+        <img src="https://edu.unicef.org.hk/image/catalog/teaching%20resource/goal11a.png" alt="SDG11: Sustainable Cities and Communities">
+        <p>HipzHub encourages artists to thrive by connecting them in vibrant, sustainable, virtual communities. Our digital galleries and exhibition spaces not only reduce the environmental impact of traditional venues but also serve as cross-cultural bridges that enrich and unite communities. We believe in the power of art to foster mutual understanding and respect across diverse populations, making cities and communities more inclusive, resilient, and culturally vibrant.</p>
+    </div>
 </div>
 
 <div class="card">
@@ -179,6 +227,15 @@
         } else {
             drawText.classList.remove('handwriting');
         }
+    });
+</script>
+
+<script>
+    const expandableCard = document.querySelector('.expandable-card');
+    const nestedCard = document.getElementById('nested-card');
+
+    expandableCard.addEventListener('click', () => {
+        nestedCard.style.display = nestedCard.style.display === 'none' || nestedCard.style.display === '' ? 'block' : 'none';
     });
 </script>
 

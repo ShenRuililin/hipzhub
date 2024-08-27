@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drawing Page</title>
+<style>
+    body {
+        font-family: 'Dexa Pro', monospace;
+        background: linear-gradient(to bottom, #f9f1e7, #e1d7c2);
+        color: #333;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        transition: background 0.5s;
+    }
+    main {
+        width: 800px;
+        border: 1px solid #e0e0e0;
+        display: flex;
+        flex-grow: 1;
+        box-shadow: 0 0px 0px black, 5px 5px 0px black;
+    }
+    .left-block {
+        width: 160px;
+        border-right: 1px solid #e0e0e0;
+    }
+    .colors, .brushes, .buttons {
+        background-color: #ece8e8;
+        text-align: center;
+        padding: 10px 0;
+    }
+    .colors button, .brushes button, .buttons button {
+        display: inline-block;
+        border: 1px solid #00000026;
+        outline: none;
+        cursor: pointer;
+        margin-bottom: 5px;
+        box-shadow: 2px 2px 0px #333;
+    }
+    .colors button {
+        width: 20px;
+        height: 20px;
+    }
+    .brushes button {
+        width: 100%;
+        height: 30px;
+    }
+    .buttons button {
+        width: 100%;
+        height: 30px;
+        font-size: 16px;
+    }
+    .right-block {
+        width: 640px;
+    }
+    #paint-canvas {
+        cursor: crosshair;
+        border: 1px solid #e0e0e0;
+    }
+</style>
+</head>
+<body>
+
+<main>
+    <div class="left-block">
+        <div class="colors">
+            <button type="button" value="#0000ff" style="background-color: #0000ff;"></button>
+            <button type="button" value="#009fff" style="background-color: #009fff;"></button>
+            <button type="button" value="#0fffff" style="background-color: #0fffff;"></button>
+            <button type="button" value="#bfffff" style="background-color: #bfffff;"></button>
+            <button type="button" value="#000000" style="background-color: #000000;"></button>
+            <button type="button" value="#333333" style="background-color: #333333;"></button>
+            <button type="button" value="#666666" style="background-color: #666666;"></button>
+            <button type="button" value="#999999" style="background-color: #999999;"></button>
+            <button type="button" value="#ffcc66" style="background-color: #ffcc66;"></button>
+            <button type="button" value="#ffcc00" style="background-color: #ffcc00;"></button>
+            <button type="button" value="#ffff00" style="background-color: #ffff00;"></button>
+            <button type="button" value="#ffff99" style="background-color: #ffff99;"></button>
+            <button type="button" value="#003300" style="background-color: #003300;"></button>
+            <button type="button" value="#555000" style="background-color: #555000;"></button>
+            <button type="button" value="#00ff00" style="background-color: #00ff00;"></button>
+            <button type="button" value="#99ff99" style="background-color: #99ff99;"></button>
+            <button type="button" value="#f00000" style="background-color: #f00000;"></button>
+            <button type="button" value="#ff6600" style="background-color: #ff6600;"></button>
+            <button type="button" value="#ff9933" style="background-color: #ff9933;"></button>
+            <button type="button" value="#f5deb3" style="background-color: #f5deb3;"></button>
+            <button type="button" value="#330000" style="background-color: #330000;"></button>
+            <button type="button" value="#663300" style="background-color: #663300;"></button>
+            <button type="button" value="#cc6600" style="background-color: #cc6600;"></button>
+            <button type="button" value="#deb887" style="background-color: #deb887;"></button>
+            <button type="button" value="#aa0fff" style="background-color: #aa0fff;"></button>
+            <button type="button" value="#cc66cc" style="background-color: #cc66cc;"></button>
+            <button type="button" value="#ff66ff" style="background-color: #ff66ff;"></button>
+            <button type="button" value="#ff99ff" style="background-color: #ff99ff;"></button>
+            <button type="button" value="#e8c4e8" style="background-color: #e8c4e8;"></button>
+            <button type="button" value="#ffffff" style="background-color: #ffffff;"></button>
+        </div>
+        <div class="brushes">
+            <button type="button" value="1" style="border-top: 1px solid #000;"></button>
+            <button type="button" value="2" style="border-top: 2px solid #000;"></button>
+            <button type="button" value="3" style="border-top: 3px solid #000;"></button>
+            <button type="button" value="4" style="border-top: 4px solid #000;"></button>
+            <button type="button" value="5" style="border-top: 5px solid #000;"></button>
+        </div>
+        <div class="buttons">
+            <button id="clear" type="button">Clear</button>
+            <button id="save" type="button">Save</button>
+        </div>
+    </div>
+    <div class="right-block">
+        <canvas id="paint-canvas" width="640" height="400"></canvas>
+    </div>
+</main>
+
+<script>
+window.onload = function () {
+    var canvas = document.getElementById("paint-canvas");
+    var context = canvas.getContext("2d");
+    var boundings = canvas.getBoundingClientRect();
+
+    var mouseX = 0;
+    var mouseY = 0;
+    context.strokeStyle = 'black';
+    context.lineWidth = 1;
+    var isDrawing = false;
+
+    var colors = document.getElementsByClassName('colors')[0];
+    colors.addEventListener('click', function(event) {
+        context.strokeStyle = event.target.value || 'black';
+    });
+
+    var brushes = document.getElementsByClassName('brushes')[0];
+    brushes.addEventListener('click', function(event) {
+        context.lineWidth = event.target.value || 1;
+    });
+
+    canvas.addEventListener('mousedown', function(event) {
+        setMouseCoordinates(event);
+        isDrawing = true;
+        context.beginPath();
+        context.moveTo(mouseX, mouseY);
+    });
+
+    canvas.addEventListener('mousemove', function(event) {
+        setMouseCoordinates(event);
+        if(isDrawing){
+            context.lineTo(mouseX, mouseY);
+            context.stroke();
+        }
+    });
+
+    canvas.addEventListener('mouseup', function(event) {
+        setMouseCoordinates(event);
+        isDrawing = false;
+    });
+
+    function setMouseCoordinates(event) {
+        mouseX = event.clientX - boundings.left;
+        mouseY = event.clientY - boundings.top;
+    }
+
+    var clearButton = document.getElementById('clear');
+    clearButton.addEventListener('click', function() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    });
+
+    var saveButton = document.getElementById('save');
+    saveButton.addEventListener('click', function() {
+        var imageName = prompt('Please enter image name');
+        var canvasDataURL = canvas.toDataURL();
+        var a = document.createElement('a');
+        a.href = canvasDataURL;
+        a.download = imageName || 'drawing';
+        a.click();
+    });
+};
+</script>
+
+</body>
+</html>

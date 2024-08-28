@@ -33,17 +33,22 @@
         text-align: center;
         padding: 10px 0;
     }
-    .colors button, .brushes button, .buttons button {
+    .colors button, .brushes button, .buttons button, .a button {
+        font-family: 'Dexa Pro', monospace;
         display: inline-block;
         border: 1px solid #00000026;
         outline: none;
         cursor: pointer;
         margin-bottom: 5px;
         box-shadow: 2px 2px 0px #333;
+        
+    }
+    .colors button, .brushes button, .buttons button, .a button:hover {
+        transform: translateY(-5px); /* Slight lift on hover */
     }
     .colors button {
-        width: 20px;
-        height: 20px;
+        width: 40px;
+        height: 40px;
     }
     .brushes button {
         width: 100%;
@@ -80,8 +85,6 @@
     #paint-canvas {
         width: 100%;
         height: 100%;
-        max-width: 800px;
-        max-height: 600px;
         border: 1px solid #e0e0e0;
     }
 </style>
@@ -130,9 +133,12 @@
             <button type="button" value="5"></button>
         </div>
         <div class="buttons">
-            <button id="clear" type="button">Clear</button>
-            <button id="save" type="button">Save</button>
+            <button id="clear" type="button">Clear Canvas</button>
+            <button id="save" type="button">Save as PNG</button>
+            <button onclick="window.open('https://shenruililin.github.io/hipzhub/draw/stickmann', '_blank')">Monthly Theme: Find inspiration from Stickmann, and learn the art of expression in skateboarding</button>
+            <button onclick="window.open('https://dashboard.alchemy.com/signup?a=nft-api', '_blank')">Create NFT: requires login to Alchemy (beta)</button>
         </div>
+		</div>
     </div>
     <div class="right-block">
         <canvas id="paint-canvas" width="640" height="400"></canvas>
@@ -143,7 +149,6 @@
 window.onload = function () {
     var canvas = document.getElementById("paint-canvas");
     var context = canvas.getContext("2d");
-    var boundings = canvas.getBoundingClientRect();
 
     var mouseX = 0;
     var mouseY = 0;
@@ -170,7 +175,7 @@ window.onload = function () {
 
     canvas.addEventListener('mousemove', function(event) {
         setMouseCoordinates(event);
-        if(isDrawing){
+        if (isDrawing) {
             context.lineTo(mouseX, mouseY);
             context.stroke();
         }
@@ -182,8 +187,12 @@ window.onload = function () {
     });
 
     function setMouseCoordinates(event) {
-        mouseX = event.clientX - boundings.left;
-        mouseY = event.clientY - boundings.top;
+        var rect = canvas.getBoundingClientRect();
+        var scaleX = canvas.width / rect.width;
+        var scaleY = canvas.height / rect.height;
+
+        mouseX = (event.clientX - rect.left) * scaleX;
+        mouseY = (event.clientY - rect.top) * scaleY;
     }
 
     var clearButton = document.getElementById('clear');

@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HipzGallery Decision Tree</title>
+  <head>
     <style>
         body {
-            font-family: 'Courier New', monospace;
+            font-family: 'Dexa Pro', monospace;
             background: linear-gradient(to bottom, #f9f1e7, #e1d7c2);
             color: #333;
             margin: 0;
@@ -17,28 +14,115 @@
             transition: background 0.5s;
             line-height: 1.6;
         }
-        #decision-tree {
-            max-width: 800px;
-            margin: 20px;
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 1200px;
         }
-        .reminder {
+        .gallery-item {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0px 0px black, 5px 5px 0px black;
+            border: 1px solid #333;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        #topBtn {
+            display: none;
             position: fixed;
             bottom: 20px;
-            right: 20px;
-            background-color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 10px;
         }
-    </style>
-</head>
-<body>
-    <div id="decision-tree"></div>
-    <div class="reminder">
-        Need help? Click the chat icon to talk to HipzAssistant!
-    </div>
+        #topBtn:hover {
+            background-color: #555;
+        }
+  </head>
 
-    <script src="decisiontree.js"></script>
-    <script src="script.js"></script>
+  <body>
+<div class="section-header">
+    <h1>Artist of the Week: Isabella Liu</h1>
+</div>
+
+<div class="gallery-container">
+    <div class="gallery-item">
+        <img src="path_to_image/!!!!.png" alt="Artwork by Isabella Liu">
+    </div>
+    <div class="gallery-item">
+        <img src="path_to_image/TAR.png" alt="Artwork by Isabella Liu">
+    </div>
+    <div class="gallery-item">
+        <img src="path_to_image/caroltherese.png" alt="Artwork by Isabella Liu">
+    </div>
+    <div class="gallery-item">
+        <img src="path_to_image/diatom.jpg" alt="Artwork by Isabella Liu">
+    </div>
+    <div class="gallery-item">
+        <img src="path_to_image/highwayto myheart.jpg" alt="Artwork by Isabella Liu">
+    </div>
+    <div class="gallery-item">
+        <img src="path_to_image/itmfl.png" alt="Artwork by Isabella Liu">
+    </div>
+    <div class="gallery-item">
+        <img src="path_to_image/knight.png" alt="Artwork by Isabella Liu">
+    </div>
+    <div class="gallery-item">
+        <img src="path_to_image/rgb_nautiluszine.png" alt="Artwork by Isabella Liu">
+    </div>
+    <div class="gallery-item">
+        <img src="path_to_image/smokelight.jpg" alt="Artwork by Isabella Liu">
+    </div>
+    <div class="gallery-item">
+        <img src="path_to_image/spikezine.png" alt="Artwork by Isabella Liu">
+    </div>
+</div>
+
+<button onclick="goToTop()" id="topBtn" title="Go to top of page">Top of Page</button>
+
+<script>
+    function goToTop() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    window.onscroll = function() {
+        var topButton = document.getElementById("topBtn");
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            topButton.style.display = "block";
+        } else {
+            topButton.style.display = "none";
+        }
+    };
+</script>
+
+<script>
+window.embeddedChatbotConfig = {
+    chatbotId: "phJQomxRE70_s_LKLKka4",
+    domain: "www.chatbase.co"
+}
+</script>
+<script
+src="https://www.chatbase.co/embed.min.js"
+chatbotId="phJQomxRE70_s_LKLKka4"
+domain="www.chatbase.co"
+defer>
+</script>
+
 </body>
 </html>

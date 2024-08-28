@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <style>
         body {
             font-family: 'Dexa Pro', monospace;
@@ -13,6 +13,18 @@
             align-items: center;
             transition: background 0.5s;
             line-height: 1.6;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: bold;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 10px 0;
         }
         .card {
             background-color: rgba(255, 255, 255, 0.9);
@@ -28,110 +40,147 @@
             margin: 10px 0;
             text-align: center;
         }
-        .gallery-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            margin: 0 auto;
-            max-width: 1200px;
+        .first-card {
+            margin-top: 100px;
+	}
+        .links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .gallery-item {
+        .links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+        }
+        .mini-card {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 10px;
             background-color: rgba(255, 255, 255, 0.9);
             box-shadow: 0 0px 0px black, 5px 5px 0px black;
             border: 1px solid #333;
             cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
             transition: transform 0.2s;
         }
-        .gallery-item:hover {
+        .mini-card:hover {
             transform: translateY(-5px);
         }
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        #topBtn {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 30px;
-            z-index: 99;
-            border: none;
-            outline: none;
-            background-color: #333;
-            color: white;
+	.expandable-card {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0px 0px black, 5px 5px 0px black;
+            border: 1px solid #333;
             cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.2s, background-color 0.3s;
+    	}
+    	.expandable-card:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+	    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    	}
+    	.nested-card {
+            display: none;
             padding: 15px;
-            border-radius: 10px;
-        }
-        #topBtn:hover {
-            background-color: #555;
-        }
-  </head>
+            margin-top: 10px;
+            box-shadow: 0 0px 0px black, 2px 2px 0px black;
+            border: 1px solid #333;
+            background-color: rgba(255, 255, 255, 0.95);
+    	}
+    	.nested-card img {
+            max-width: 50%;
+            height: auto;
+            margin: 10px auto;
+	    display: block;
+    	}
+    </style>
+</head>
+<body>
 
-  <body>
 <div class="card">
     <h1>Artist Spotlight — Isabella Liu</h1>
     <p>
-        This month, we're excited to feature Isabella Liu, an artist whose work deeply engages with the nuanced realities of teenage life. Isabella's art captures the vibrancy and complexity of adolescence through a lens that is both introspective and outward-looking.
+        This month, we're excited to feature Isabella Liu, an artist whose work deeply engages with the realities of teenage life. Isabella's art captures the vibrancy and complexity of adolescence through a lens that is both introspective and outward-looking.
     </p>
-    <p>
-        What sets Isabella apart is her commitment to diversity and authenticity. Her characters come from various backgrounds, each portrayed with a distinct voice and identity, reflecting the experiences that shape the adolescent journey. Whether it’s the subtle light in a late-night bus ride home or the chaotic burst of emotion in a heated discussion, her work resonates with a truthfulness that is both raw and comforting.
+    <p class="expandable-card">
+        
     </p>
-    <p>
-        In some pieces, Isabella explores abstract motifs, drawing on elements of nature and mythology. These works serve as metaphors for growth and change, with detailed patterns that suggest the complex process of coming into one’s own amidst a world of chaos.
-    </p>
-</div>
-
-<div class="gallery-container">
-    <div class="gallery-item">
-        <img src="IsabellaLiu/!!!!.png" alt="Artwork by Isabella Liu">
-    </div>
-    <div class="gallery-item">
-        <img src="IsabellaLiu/TAR.png" alt="Artwork by Isabella Liu">
-    </div>
-    <div class="gallery-item">
-        <img src="IsabellaLiu/caroltherese.png" alt="Artwork by Isabella Liu">
-    </div>
-    <div class="gallery-item">
-        <img src="IsabellaLiu/diatom.jpg" alt="Artwork by Isabella Liu">
-    </div>
-    <div class="gallery-item">
-        <img src="IsabellaLiu/highwayto myheart.jpg" alt="Artwork by Isabella Liu">
-    </div>
-    <div class="gallery-item">
-        <img src="IsabellaLiu/itmfl.png" alt="Artwork by Isabella Liu">
-    </div>
-    <div class="gallery-item">
-        <img src="IsabellaLiu/knight.png" alt="Artwork by Isabella Liu">
-    </div>
-    <div class="gallery-item">
-        <img src="IsabellaLiu/rgb_nautiluszine.png" alt="Artwork by Isabella Liu">
-    </div>
-    <div class="gallery-item">
-        <img src="IsabellaLiu/smokelight.jpg" alt="Artwork by Isabella Liu">
-    </div>
-    <div class="gallery-item">
-        <img src="IsabellaLiu/spikezine.png" alt="Artwork by Isabella Liu">
+    <div class="nested-card" id="nested-card">
+        <p>
+          What sets Isabella apart is her commitment to diversity and authenticity. Her characters come from various backgrounds, each portrayed with a distinct voice and identity, reflecting the experiences that shape the adolescent journey. Whether it’s the subtle light in a late-night bus ride home or the chaotic burst of emotion in a heated discussion, her work resonates with a truthfulness that is both raw and comforting.
+        </p>
+        <p>
+          In some pieces, Isabella explores abstract motifs, drawing on elements of nature and mythology. These works serve as metaphors for growth and change, with detailed patterns that suggest the complex process of coming into one’s own amidst a world of chaos.
+        </p>
+        <h2>!!!!</h2>
+        <img src="!!!!.png" alt="!!!!">
+        <h2>TAR</h2>
+        <img src="TAR.png" alt="TAR">
+        <h2>Carol Therese</h2>
+        <img src="caroltherese.png" alt="Carol Therese">
+        <h2>Diatom</h2>
+        <img src="diatom.jpg" alt="Diatom">
+        <h2>Highway to My Heart</h2>
+        <img src="highwayto myheart.jpg" alt="Highway to My Heart">
+        <h2>Itmfl</h2>
+        <img src="itmfl.png" alt="Itmfl">
+        <h2>Knight</h2>
+        <img src="knight.png" alt="Knight">
+        <h2>Rgb Nautilus Zine</h2>
+        <img src="rgb_nautiluszine.png" alt="Rgb Nautilus Zine">
+        <h2>Smoke Light</h2>
+        <img src="smokelight.jpg" alt="Smoke Light">
+        <h2>Spike Zine</h2>
+        <img src="spikezine.png" alt="Spike Zine">
     </div>
 </div>
-
-<button onclick="goToTop()" id="topBtn" title="Go to top of page">Top of Page</button>
 
 <script>
-    function goToTop() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-    }
-    window.onscroll = function() {
-        var topButton = document.getElementById("topBtn");
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            topButton.style.display = "block";
+    window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+        const maxScroll = document.body.scrollHeight - window.innerHeight;
+        const scrollPercentage = scrollPosition / maxScroll;
+
+        // Background color transition
+        const startColor = [249, 241, 231]; // #f9f1e7 (rice color)
+        const endColor = [255, 255, 255]; // white
+
+        const newColor = startColor.map((start, index) => {
+            return Math.round(start + (endColor[index] - start) * scrollPercentage);
+        });
+
+        document.body.style.backgroundColor = `rgb(${newColor.join(',')})`;
+
+        // Font change to handwriting
+        const drawText = document.getElementById('draw');
+        const lastCard = document.getElementById('last-card');
+        const changeFontPosition = lastCard.offsetTop;
+
+        if (scrollPosition + window.innerHeight >= changeFontPosition) {
+            drawText.classList.add('handwriting');
         } else {
-            topButton.style.display = "none";
+            drawText.classList.remove('handwriting');
         }
-    };
+    });
+</script>
+
+<script>
+    const expandableCards = document.querySelectorAll('.expandable-card');
+
+    expandableCards.forEach((card) => {
+        const nestedCard = card.nextElementSibling;
+
+        card.addEventListener('click', () => {
+            nestedCard.style.display = nestedCard.style.display === 'none' || nestedCard.style.display === '' ? 'block' : 'none';
+        });
+    });
 </script>
 
 <script>

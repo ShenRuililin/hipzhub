@@ -117,9 +117,14 @@
     <p>
         When was the last time you picked up a paintbrush or sketched a doodle? If you're like most people, it's probably been a while. But did you know that engaging in art has numerous benefits for your mental health, creativity, and overall well-being?
     </p>
-    <p>
+    <p class="expandable-card" onclick="toggleNestedCard('nested-card')">
         Studies have shown that creating art can reduce stress, improve cognitive function, and boost self-esteem. At HipzHub, we believe that artistic expression is a fundamental human right, and we're on a mission to make it accessible to everyone.
     </p>
+    <div class="nested-card" id="nested-card">
+        <p>The power of art to transform our well-being is truly remarkable. Research by <a href="https://www.taylorfrancis.com/chapters/edit/10.4324/9781003008675-23/health-benefits-art-experience-claire-howlin" target="_blank">Howlin (2022)</a> has revealed that engaging in art-making activities can significantly lower cortisol levels and blood pressure, providing a natural way to alleviate stress and manage pain. Imagine coming home after a long day and letting your worries melt away as you pick up a paintbrush or mold some clay.</p>
+        <p>Even simple acts of creativity, like drawing, can have profound effects on our bodies. <a href="https://esirc.emporia.edu/handle/123456789/982?show=full" target="_blank">Goettemoeller's (2012)</a> research suggests that the act of drawing may increase hand temperature, a physiological sign of relaxation. Picture yourself sketching freely, feeling the tension leave your body with each stroke of the pencil.</p>
+        <p>The impact of art extends beyond creation to appreciation as well. <a href="https://journals.sagepub.com/doi/10.2190/EM.30.1.g" target="_blank">Tröndle and Tschacher's (2012)</a> study in museum settings have shown that simply viewing art can trigger strong physical reactions and influence our behavior. Your next gallery visit could be more than just a cultural experience – it could be a full-body rejuvenation.</p>
+    </div>
 </div>
 
 <div class="card">
@@ -155,7 +160,7 @@
         HipzHub is a revolutionary platform that empowers artists and art enthusiasts worldwide. We've created a space where you can discover, create, and collaborate on art like never before.
     </p>
     <p>
-        When you join HipzHub, you'll be greeted by HipzAssistant, your personal AI-powered companion. HipzAssistant is here to guide you through your artistic journey, offering personalized recommendations and support every step of the way.
+        When you join HipzHub, you'll be greeted by HipzAssistant, your personal art mentor and friend. Just click the text bubble on the bottom right corner of the page! HipzAssistant is here to guide you through the HipzHub platform and through your artistic journey, offering personalized recommendations and support every step of the way.
     </p>
 </div>
 
@@ -164,9 +169,8 @@
     <p>
         Looking for inspiration? Check out HipzGallery, our immersive virtual gallery featuring the best of contemporary digital art. Explore a diverse range of artworks, discover emerging talents, and find the spark that ignites your creativity.
     </p>
-    <p>
-        Ready to create? Head over to HipzColab, our innovative collaboration platform. With features like version control and real-time editing, you can work with artists from around the world, unleashing your collaborative potential and pushing the boundaries of your artistic vision.
-    </p>
+    <p id="draw">
+    <a href="https://shenruililin.github.io/hipzhub/gallery" target="_blank" class="mini-card">View HipzGallery</a>
 </div>
 
 <div class="card">
@@ -175,7 +179,10 @@
         At HipzHub, we're committed to protecting your art and ensuring that you're fairly compensated for your work. That's why we've integrated blockchain technology into our platform.
     </p>
     <p>
-        With HipzChain, you can create secure, traceable NFTs for your artworks, guaranteeing their authenticity and provenance. And with our fractional ownership model, you can benefit directly from the success of your creations.
+        Through HipzChain, you can create secure, traceable NFTs for your artworks, guaranteeing their authenticity and provenance. And with our fractional ownership model, you can benefit directly from the success of your creations.
+    </p>
+    <p id="draw">
+    <a href="https://dashboard.alchemy.com/signup?a=nft-api" target="_blank" class="mini-card">Try HipzChain: requires login to Alchemy (beta)</a>
     </p>
 </div>
 
@@ -230,11 +237,14 @@
 </script>
 
 <script>
-    const expandableCard = document.querySelector('.expandable-card');
-    const nestedCard = document.getElementById('nested-card');
+    const expandableCards = document.querySelectorAll('.expandable-card');
 
-    expandableCard.addEventListener('click', () => {
-        nestedCard.style.display = nestedCard.style.display === 'none' || nestedCard.style.display === '' ? 'block' : 'none';
+    expandableCards.forEach((card) => {
+        const nestedCard = card.nextElementSibling;
+
+        card.addEventListener('click', () => {
+            nestedCard.style.display = nestedCard.style.display === 'none' || nestedCard.style.display === '' ? 'block' : 'none';
+        });
     });
 </script>
 
